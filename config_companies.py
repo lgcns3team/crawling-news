@@ -1,9 +1,10 @@
 COMPANIES = [
-    {"company_id": "005930", "sector": "반도체", "company_name": "삼성전자",       "query": "삼성전자"},
-    {"company_id": "005380", "sector": "모빌리티", "company_name": "현대차",     "query": "현대차"},
-    {"company_id": "373220",  "sector": "2차전지", "company_name": "LG에너지솔루션", "query": "LG에너지솔루션"},
-    {"company_id": "009830", "sector": "재생에너지", "company_name": "한화솔루션",          "query": "한화솔루션"},
+    # 0. 풀 파이프라인 돌릴 5개 종목
     {"company_id": "034020", "sector": "원자력", "company_name": "두산에너빌리티", "query": "두산에너빌리티"},
+    {"company_id": "009830", "sector": "재생에너지", "company_name": "한화솔루션",          "query": "한화솔루션"},
+    {"company_id": "373220",  "sector": "2차전지", "company_name": "LG에너지솔루션", "query": "LG에너지솔루션"},
+    {"company_id": "005380", "sector": "모빌리티", "company_name": "현대차",     "query": "현대차"},
+    {"company_id": "005930", "sector": "반도체", "company_name": "삼성전자",       "query": "삼성전자"},
     
     # 1. 반도체
     {"company_id": "000660", "sector": "반도체", "company_name": "SK 하이닉스",  "query": "SK하이닉스"},
@@ -31,7 +32,7 @@ COMPANIES = [
     {"company_id": "015760", "sector": "원자력", "company_name": "한국전력",       "query": "한국전력"},
 ]
 
-# 풀 파이프라인(1~4) 돌릴 5개 종목: 섹터 대표
+# 풀 파이프라인 돌릴 5개 종목: 섹터 대표
 FULL_PIPELINE_COMPANY_NAMES = {
     "삼성전자",
     "현대차",
