@@ -2,10 +2,9 @@ import os
 import pymysql
 from dotenv import load_dotenv
 
-load_dotenv()
 
 def get_connection():
-    
+    load_dotenv()    
     return pymysql.connect(
         host=os.getenv("DB_HOST"),
         port=int(os.getenv("DB_PORT")),
