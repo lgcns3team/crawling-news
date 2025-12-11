@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from config_companies import COMPANIES
 from bs4 import BeautifulSoup
 import requests
+from datetime import datetime
 import json
 
 ### Naver News Search API Response Fields ###
@@ -55,6 +56,7 @@ def clean_html_tags(text):
 
 def step1_naver_articles():
     
+    internal_id = 1
     client_id, client_secret = get_env_variables()
     
     if not client_id or not client_secret:
@@ -64,17 +66,21 @@ def step1_naver_articles():
     
     results = []
     
-    #TODO: pubdate 전처리, 각 뉴스에 고유 ID 부여?
     for company in COMPANIES:
         for item in fetch_news(company["query"], headers):
+            raw_time = item.get("pubDate") or ""
+            dt = datetime.strptime(raw_time, "%a, %d %b %Y %H:%M:%S %z") if raw_time else None
+            db_time = dt.strftime("%Y-%m-%d %H:%M:%S") if dt else None
             results.append({
+                "id": internal_id,
                 "company_id": company["company_id"],
                 "sector": company["sector"],
                 "company_name": company["company_name"],
                 "title": clean_html_tags(item["title"]),
                 "originallink": item["originallink"],
-                "pubDate": item["pubDate"],
+                "pubDate": db_time,
             })
+            internal_id += 1
     
     #json 확인용
     #with open("step1_naver_articles.json", "w", encoding="utf-8") as f:
