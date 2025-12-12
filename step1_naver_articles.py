@@ -83,7 +83,7 @@ def step1_naver_articles():
             internal_id += 1
     
     #json 확인용
-    #with open("step1_naver_articles.json", "w", encoding="utf-8") as f:
-    #    json.dump(results, f, ensure_ascii=False, indent=2)
+    with open("step1_naver_articles.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
         
     return results

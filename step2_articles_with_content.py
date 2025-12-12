@@ -70,17 +70,14 @@ def step2_articles_with_content(result_by_step1):
     ### json 확인용 ###
 
     # 핵심 종목 json 확인
-    #with open("step2_full_pipeline.json", "w", encoding="utf-8") as f:
-    #    json.dump(full_pipeline_articles, f, ensure_ascii=False, indent=4)
+    with open("step2_full_pipeline.json", "w", encoding="utf-8") as f:
+        json.dump(full_pipeline_articles, f, ensure_ascii=False, indent=4)
 
     # 나머지 종목 json 확인
-    #with open("step2_db_only.json", "w", encoding="utf-8") as f:
-    #    json.dump(db_only_articles, f, ensure_ascii=False, indent=4)
+    with open("step2_db_only.json", "w", encoding="utf-8") as f:
+        json.dump(db_only_articles, f, ensure_ascii=False, indent=4)
 
-    return {
-        "full_pipeline_articles": full_pipeline_articles,
-        "db_only_articles": db_only_articles,
-    }
+    return full_pipeline_articles, db_only_articles
 
 
 
