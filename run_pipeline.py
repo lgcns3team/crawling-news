@@ -9,7 +9,7 @@ from db_config import get_connection
 def main():
 
     result_by_step1 = step1_naver_articles()
-    result_by_step2 = step2_articles_with_content(result_by_step1)
+    result_by_step2, result_db = step2_articles_with_content(result_by_step1)
     step3_articles_with_summary_and_groups()
     setp4_articles_with_sentiment()
 
