@@ -1,3 +1,33 @@
+import json
+
+def filter_step1_by_db_urls(conn, articles):
+    urls = []
+    for art in articles:
+        url = art.get("originallink")
+        if url:
+            urls.append(url)
+
+    urls = list(set(urls))
+    if not urls:
+        return articles
+
+    placeholders = ",".join(["%s"] * len(urls))
+    sql = f"SELECT url FROM News WHERE url IN ({placeholders})"
+
+    with conn.cursor() as cur:
+        cur.execute(sql, urls)
+        existing = {row["url"] for row in cur.fetchall()}
+
+    filtered = []
+    for art in articles:
+        url = art.get("originallink")
+        if url and url in existing:
+            continue
+        filtered.append(art)
+    with open("step1_naver_articles_filtered.json", "w", encoding="utf-8") as f:
+        json.dump(filtered, f, ensure_ascii=False, indent=2)
+    return filtered
+
 
 
 def save_step2_results_to_db(conn, articles):
