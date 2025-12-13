@@ -27,8 +27,8 @@ def filter_step1_by_db_urls(conn, articles):
         
     print(f"step1 필터링 완료: 필터링 후 수집 기사 수 = {len(filtered)}건")
     
-    with open("step1_naver_articles_filtered.json", "w", encoding="utf-8") as f:
-        json.dump(filtered, f, ensure_ascii=False, indent=2)
+    #with open("step1_naver_articles_filtered.json", "w", encoding="utf-8") as f:
+    #    json.dump(filtered, f, ensure_ascii=False, indent=2)
     
     return filtered
 
@@ -96,5 +96,96 @@ def save_step3_results_to_db(conn,articles):
     conn.commit()
     print(f" News(SUMMARY) {len(articles)}건 저장 완료")
 
-def save_step4_results_to_db():
-    pass
+def save_step4_results_to_db(conn, articles):
+
+    # News 관련 SQL
+    news_check_sql = "SELECT id FROM News WHERE url = %s LIMIT 1"
+    news_insert_sql = """
+        INSERT INTO News (title, date, full_text, url, summary_text, company_id)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """
+
+    # Sentiments 관련 SQL
+    sent_upsert_sql = """
+        INSERT INTO Sentiments (label, prob_pos, prob_neg, prob_neu, score, date, news_id)
+        VALUES (%s, %s, %s, %s, %s, NOW(), %s)
+        ON DUPLICATE KEY UPDATE
+            label = VALUES(label),
+            prob_pos = VALUES(prob_pos),
+            prob_neg = VALUES(prob_neg),
+            prob_neu = VALUES(prob_neu),
+            score = VALUES(score),
+            date = NOW()
+    """
+
+    inserted_news = 0
+    upserted_sent = 0
+    skipped = 0
+
+    with conn.cursor() as cur:
+        for art in articles:
+            url = art.get("url")
+            if not url:
+                skipped += 1
+                continue
+
+            summary = art.get("summary_text")
+            if summary and len(summary) > 300:
+                print("요약 너무 길면 스킵:", len(summary), url)
+                skipped += 1
+                continue
+            
+            # News: INSERT if not exists 
+            cur.execute(news_check_sql, (url,))
+            row = cur.fetchone()
+
+            if row:
+                news_id = row["id"] if isinstance(row, dict) else row[0]
+            else:
+                try:
+                    cur.execute(
+                        news_insert_sql,
+                        (
+                            art.get("title"),
+                            art.get("date"),
+                            art.get("full_text"),
+                            url,
+                            summary,
+                            art.get("company_id"),
+                        ),
+                    )
+                    news_id = cur.lastrowid
+                    inserted_news += 1
+                except Exception as e:
+                    print(f"DB: News INSERT 실패 - {url}: {e}")
+                    skipped += 1
+                    continue
+
+            # Sentiments: UPSERT
+            label = art.get("sentiment_label")
+            p_pos = art.get("p_positive")
+            p_neg = art.get("p_negative")
+            p_neu = art.get("p_neutral")
+            score = art.get("k_index")
+
+            if label is None or p_pos is None or p_neg is None or p_neu is None or score is None:
+                print(f"DB: Sentiments 값 부족 스킵 - news_id={news_id}, url={url}")
+                skipped += 1
+                continue
+
+            try:
+                cur.execute(
+                    sent_upsert_sql,
+                    (label, p_pos, p_neg, p_neu, score, news_id),
+                )
+                upserted_sent += 1
+            except Exception as e:
+                print(f"DB: Sentiments UPSERT 실패 - news_id={news_id}, url={url}: {e}")
+                skipped += 1
+                continue
+
+    conn.commit()
+    print("STEP4 DB 저장 결과")
+    print(f" - News(summary) 저장: {inserted_news}")
+    print(f" - Sentiments(감정분석) 저장: {upserted_sent}")
+    print(f" - 스킵: {skipped}")
