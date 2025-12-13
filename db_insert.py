@@ -24,8 +24,12 @@ def filter_step1_by_db_urls(conn, articles):
         if url and url in existing:
             continue
         filtered.append(art)
+        
+    print(f"step1 필터링 완료: 필터링 후 수집 기사 수 = {len(filtered)}건")
+    
     with open("step1_naver_articles_filtered.json", "w", encoding="utf-8") as f:
         json.dump(filtered, f, ensure_ascii=False, indent=2)
+    
     return filtered
 
 
@@ -51,7 +55,7 @@ def save_step2_results_to_db(conn, articles):
                 (art["title"], art["date"], art["full_text"], art["url"], art["company_id"])
             )
     conn.commit()
-    print(f" News {len(articles)}건 저장 완료")
+    print(f" News(DBONLY) {len(articles)}건 저장 완료")
 
 def save_step3_results_to_db(conn,articles):
     sql = """
@@ -90,7 +94,7 @@ def save_step3_results_to_db(conn,articles):
                 continue
 
     conn.commit()
-    print(f" News(요약 포함) {len(articles)}건 저장 완료")
+    print(f" News(SUMMARY) {len(articles)}건 저장 완료")
 
 def save_step4_results_to_db():
     pass

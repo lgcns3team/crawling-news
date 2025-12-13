@@ -66,7 +66,7 @@ def summarize_article(company_name, full_text):
         return content, True
     
     except Exception as e:
-        print(f"STEP3: GPT 요약 중 오류 발생: {e}")
+        print(f"step3: GPT 요약 중 오류 발생: {e}")
         return "", False
 
 def step3_articles_with_summary_and_groups(result_by_step2):
@@ -80,7 +80,7 @@ def step3_articles_with_summary_and_groups(result_by_step2):
         summary, is_related = summarize_article(company_name, full_text)
         
         if not is_related:
-            print(f"STEP3: 회사와 관련 없는 기사 스킵  {art.get('url')}")
+            print(f"step3: id({art.get('id')}) 회사와 관련 없는 기사 스킵  {art.get('url')}")
             not_related_articles.append(art)
             continue
 
@@ -91,6 +91,10 @@ def step3_articles_with_summary_and_groups(result_by_step2):
         
         result_with_summary.append(new_art)
 
+
+    print("step3 완료: 요약 및 관련성 판단 완료")
+    print(f" - 회사와 관련 있는 기사: {len(result_with_summary)}")
+    print(f" - 회사와 관련 없는 기사: {len(not_related_articles)}")
 
     # 관련 있는 기사 + 요약본
     with open("step3_related.json", "w", encoding="utf-8") as f:
