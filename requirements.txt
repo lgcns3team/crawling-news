@@ -1,0 +1,20 @@
+# 기본 크롤링
+requests
+beautifulsoup4
+lxml
+newspaper3k
+pandas
+
+# DB
+pymysql
+sqlalchemy
+python-dotenv
+
+# GPT 요약
+openai
+
+# 감정 분석
+torch
+transformers
+
+lxml_html_clean
