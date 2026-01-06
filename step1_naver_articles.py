@@ -39,7 +39,7 @@ def build_headers(client_id, client_secret):
         "X-Naver-Client-Secret": client_secret,
     }
 
-def fetch_news(query, headers, display=20):
+def fetch_news(query, headers, display=10):
     url = "https://openapi.naver.com/v1/search/news.json"
     params = {"query": query, "display": display, "sort": "date"}
     response = requests.get(url, headers=headers, params=params)
