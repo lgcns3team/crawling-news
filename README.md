@@ -35,6 +35,7 @@ pip install torch
 ### Excute
 ```
 python run_pipeline.py
+python aggregate_stock_score.py
 ```
 - 로컬 서버에서는 crontab으로, 배포환경에서는 cronjob으로 5분마다 실행
 ---
@@ -77,6 +78,9 @@ python run_pipeline.py
 - 뉴스 요약 텍스트 기반 감정 분석 수행
 - 감정 점수 및 라벨을 DB에 저장하여 후속 분석에 활용
 
+`aggregate_stock_score.py`
+- 각 뉴스별 감정점수를 한시간 단위로 집계해서 db에 저장
+
 
 ### 📊 Collected News Data Fields
 
@@ -117,5 +121,6 @@ python run_pipeline.py
  ┣ 📜step3_articles_with_summary_and_groups.py
  ┗ 📜step4_articles_with_sentiment.py
 ```
+
 
 
