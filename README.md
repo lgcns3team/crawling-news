@@ -3,86 +3,6 @@
 
 ```
 📦crawling-news
- ┣ 📂.git
- ┃ ┣ 📂hooks
- ┃ ┃ ┣ 📜applypatch-msg.sample
- ┃ ┃ ┣ 📜commit-msg.sample
- ┃ ┃ ┣ 📜fsmonitor-watchman.sample
- ┃ ┃ ┣ 📜post-update.sample
- ┃ ┃ ┣ 📜pre-applypatch.sample
- ┃ ┃ ┣ 📜pre-commit.sample
- ┃ ┃ ┣ 📜pre-merge-commit.sample
- ┃ ┃ ┣ 📜pre-push.sample
- ┃ ┃ ┣ 📜pre-rebase.sample
- ┃ ┃ ┣ 📜pre-receive.sample
- ┃ ┃ ┣ 📜prepare-commit-msg.sample
- ┃ ┃ ┣ 📜push-to-checkout.sample
- ┃ ┃ ┣ 📜sendemail-validate.sample
- ┃ ┃ ┗ 📜update.sample
- ┃ ┣ 📂info
- ┃ ┃ ┗ 📜exclude
- ┃ ┣ 📂logs
- ┃ ┃ ┣ 📂refs
- ┃ ┃ ┃ ┣ 📂heads
- ┃ ┃ ┃ ┃ ┣ 📜dev
- ┃ ┃ ┃ ┃ ┗ 📜main
- ┃ ┃ ┃ ┗ 📂remotes
- ┃ ┃ ┃ ┃ ┗ 📂origin
- ┃ ┃ ┃ ┃ ┃ ┣ 📂feature
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ecr
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜llm-test
- ┃ ┃ ┃ ┃ ┃ ┗ 📜HEAD
- ┃ ┃ ┗ 📜HEAD
- ┃ ┣ 📂objects
- ┃ ┃ ┣ 📂03
- ┃ ┃ ┃ ┗ 📜30b13c4080450b631c42a5bd3566d98333e6b2
- ┃ ┃ ┣ 📂04
- ┃ ┃ ┃ ┗ 📜1e8c4a03f2f7ab7dcdeab2abc627ca82ef84e2
- ┃ ┃ ┣ 📂2d
- ┃ ┃ ┃ ┗ 📜935218db885b30dbbb153ca6db22bd63b7a28b
- ┃ ┃ ┣ 📂52
- ┃ ┃ ┃ ┗ 📜1599827e2f92226850b4dd0d9577b2ef02fbeb
- ┃ ┃ ┣ 📂61
- ┃ ┃ ┃ ┗ 📜f80d41c0c91f2bdc87dd31fb9248aca254f0b1
- ┃ ┃ ┣ 📂6f
- ┃ ┃ ┃ ┗ 📜500c59e7ea9e9ac75ea71c8bdbe5717928b3f2
- ┃ ┃ ┣ 📂91
- ┃ ┃ ┃ ┗ 📜5eceecb5ddbd455ab6bddc337a75e073abf879
- ┃ ┃ ┣ 📂96
- ┃ ┃ ┃ ┗ 📜91bce3788d62032ed3d4141e7c47acb2901c88
- ┃ ┃ ┣ 📂b4
- ┃ ┃ ┃ ┗ 📜6e042381c29dda8a0bc4de163d7c7c3e979bd9
- ┃ ┃ ┣ 📂c6
- ┃ ┃ ┃ ┗ 📜8740ecad66dea35564d455b876db13e935ff5d
- ┃ ┃ ┣ 📂d3
- ┃ ┃ ┃ ┗ 📜a0967eabc0eca7cc8ecc44928e55db9b4ec9b8
- ┃ ┃ ┣ 📂f3
- ┃ ┃ ┃ ┗ 📜32ea13d839bd62c939e27ebb556b6eef3e5b3b
- ┃ ┃ ┣ 📂fa
- ┃ ┃ ┃ ┗ 📜8d7d756c32081078e24cdc5f29b0fd89e7b3bb
- ┃ ┃ ┣ 📂info
- ┃ ┃ ┗ 📂pack
- ┃ ┃ ┃ ┣ 📜pack-7ede7f9b783ffaa40b226bb3ed6a61edf388906f.idx
- ┃ ┃ ┃ ┣ 📜pack-7ede7f9b783ffaa40b226bb3ed6a61edf388906f.pack
- ┃ ┃ ┃ ┗ 📜pack-7ede7f9b783ffaa40b226bb3ed6a61edf388906f.rev
- ┃ ┣ 📂refs
- ┃ ┃ ┣ 📂heads
- ┃ ┃ ┃ ┣ 📜dev
- ┃ ┃ ┃ ┗ 📜main
- ┃ ┃ ┣ 📂remotes
- ┃ ┃ ┃ ┗ 📂origin
- ┃ ┃ ┃ ┃ ┣ 📂feature
- ┃ ┃ ┃ ┃ ┃ ┣ 📜ecr
- ┃ ┃ ┃ ┃ ┃ ┗ 📜llm-test
- ┃ ┃ ┃ ┃ ┗ 📜HEAD
- ┃ ┃ ┗ 📂tags
- ┃ ┣ 📜config
- ┃ ┣ 📜description
- ┃ ┣ 📜FETCH_HEAD
- ┃ ┣ 📜HEAD
- ┃ ┣ 📜index
- ┃ ┣ 📜ORIG_HEAD
- ┃ ┗ 📜packed-refs
  ┣ 📜.gitignore
  ┣ 📜aggregate_stock_score.py
  ┣ 📜config_companies.py
@@ -97,3 +17,4 @@
  ┣ 📜step3_articles_with_summary_and_groups.py
  ┗ 📜step4_articles_with_sentiment.py
 ```
+
