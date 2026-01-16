@@ -88,11 +88,11 @@ python aggregate_stock_score.py
 
 | Field Name        | Source (NAVER Response) | Description |
 |------------------|--------------------------|-------------|
-| `title`          | `item.title`             | 뉴스 기사 제목 (검색어 일치 부분은 `<b>` 태그로 감싸져 있을 수 있어 제거 후 저장) :contentReference[oaicite:2]{index=2} |
-| `originallink`   | `item.originallink`      | 뉴스 기사 **원문 URL** :contentReference[oaicite:3]{index=3} |
-| `link`           | `item.link`              | 네이버 뉴스 URL (네이버에 없으면 원문 URL이 올 수 있음) :contentReference[oaicite:4]{index=4} |
-| `description`    | `item.description`       | 기사 요약 패시지(검색어 일치 부분 `<b>` 포함 가능) :contentReference[oaicite:5]{index=5} |
-| `pubDate`        | `item.pubDate`           | 네이버에 제공된 기사 시간 (RFC 822 형태로 옴) :contentReference[oaicite:6]{index=6} |
+| `title`          | `item.title`             | 뉴스 기사 제목 (검색어 일치 부분은 `<b>` 태그로 감싸져 있을 수 있어 제거 후 저장)  |
+| `originallink`   | `item.originallink`      | 뉴스 기사 **원문 URL**  |
+| `link`           | `item.link`              | 네이버 뉴스 URL (네이버에 없으면 원문 URL이 올 수 있음)  |
+| `description`    | `item.description`       | 기사 요약 패시지(검색어 일치 부분 `<b>` 포함 가능)  |
+| `pubDate`        | `item.pubDate`           | 네이버에 제공된 기사 시간 (RFC 822 형태로 옴)  |
 
 - Reference: https://developers.naver.com/docs/serviceapi/search/news/news.md
 
@@ -121,6 +121,7 @@ python aggregate_stock_score.py
  ┣ 📜step3_articles_with_summary_and_groups.py
  ┗ 📜step4_articles_with_sentiment.py
 ```
+
 
 
 
